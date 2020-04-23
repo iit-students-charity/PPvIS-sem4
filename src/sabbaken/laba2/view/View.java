@@ -168,117 +168,68 @@ public class View {
     }
 
     private void addItems() {
-        final String WINDOW_TITLE_TEXT = "Дадаць радкі: ",
-                SURNAME_LABEL_TEXT = "Прозвішча: ",
-                NAME_LABEL_TEXT = "Імя: ",
-                PATRONYM_LABEL_TEXT = "Імя па бацьку: ",
-                GROUP_LABEL_TEXT = "Назва групы: ",
-                EXAM_NUMBER_LABEL_TEXT = "Нумар экзамена: ",
-                EXAM_NAME_LABEL_TEXT = "Назва экзамена: ",
-                EXAM_SCORE_LABEL_TEXT = "Адзнака: ";
+        final String WINDOW_TITLE_TEXT = "Добавить товар: ",
+                NAME_LABEL_TEXT = "Название: ",
+                M_NAME_LABEL_TEXT = "Название производителя: ",
+                UPN_LABEL_TEXT = "УПН: ",
+                STOCK_LABEL_TEXT = "Количество на складе: ",
+                ADDRESS_NUMBER_LABEL_TEXT = "Адрес склада: ";
+
 //        List<Exam>   examList       = new ArrayList<>();
-        TextField surnameField = new TextField(),
-                nameField = new TextField(),
-                patronymField = new TextField(),
-                groupField = new TextField();
-        class ComboElement {
-            private int selectedItem;
-            private TextField examNameField,
-                    examScoreField;
-            private ComboBox comboBox;
+        TextField surnameField  = new TextField(),
+                nameField       = new TextField(),
+                mNameField      = new TextField(),
+                upnField        = new TextField(),
+                stockField      = new TextField(),
+                addressField    = new TextField();
 
-            public ComboElement(int selectedItem) {
-                this.selectedItem = selectedItem;
-                this.comboBox = new ComboBox<Integer>();
-                this.examNameField = new TextField("");
-                this.examScoreField = new TextField("0");
-//
-//                for(int i = 0; i < controller.getExamNumber(); i++){
-//                    comboBox.getItems().addAll(((Integer)(i+1)).toString());
-//                    examList.add(new Exam("", 0));
-//                }
 
-                comboBox.setValue(((Integer) (selectedItem)).toString());
-                refreshSelected();
-
-                comboBox.setOnAction(ae -> refreshSelected());
-            }
-
-            public TextField getExamNameField() {
-                return examNameField;
-            }
-
-            public TextField getExamScoreField() {
-                return examScoreField;
-            }
-
-            public ComboBox get() {
-                return comboBox;
-            }
-
-            public void refreshSelected() {
-//                examList.get(selectedItem).setName(examNameField.getText());
-//                try {
-//                    examList.get(selectedItem).setScore(Integer.valueOf(examScoreField.getText()));
-//                } catch (NumberFormatException e){
-//                    examList.get(selectedItem).setScore(0);
-//                }
-//                selectedItem = comboBox.getSelectionModel().getSelectedIndex();
-//
-//                examNameField.setText(examList.get(selectedItem).getName());
-//                examScoreField.setText(((Integer)examList.get(selectedItem).getScore()).toString());
-            }
-        }
-        ComboElement examComElement = new ComboElement(1);
         GridPane root = new GridPane();
         Alert addItemWindow;
 
         root.addRow(0,
-                new Label(SURNAME_LABEL_TEXT),
-                surnameField
-        );
-        root.addRow(1,
                 new Label(NAME_LABEL_TEXT),
                 nameField
         );
+
+        root.addRow(1,
+                new Label(M_NAME_LABEL_TEXT),
+                mNameField
+        );
+
         root.addRow(2,
-                new Label(PATRONYM_LABEL_TEXT),
-                patronymField
+                new Label(UPN_LABEL_TEXT),
+                upnField
         );
+
         root.addRow(3,
-                new Label(GROUP_LABEL_TEXT),
-                groupField
+                new Label(STOCK_LABEL_TEXT),
+                stockField
         );
+
         root.addRow(4,
-                new Label(EXAM_NUMBER_LABEL_TEXT),
-                examComElement.get()
+                new Label(ADDRESS_NUMBER_LABEL_TEXT),
+                addressField
         );
-        root.addRow(5,
-                new Label(EXAM_NAME_LABEL_TEXT),
-                examComElement.getExamNameField()
-        );
-        root.addRow(6,
-                new Label(EXAM_SCORE_LABEL_TEXT),
-                examComElement.getExamScoreField()
-        );
+
 
         addItemWindow = createEmptyCloseableDialog();
         addItemWindow.setTitle(WINDOW_TITLE_TEXT);
         addItemWindow.getDialogPane().setContent(root);
         addItemWindow.show();
 
-//        ((Button)addItemWindow.getDialogPane().lookupButton(addItemWindow.getButtonTypes().get(0))).setOnAction(ae->{
-//            controller.addStudent(
-//                    surnameField.getText(),
-//                    nameField.getText(),
-//                    patronymField.getText(),
-//                    groupField.getText(),
-//                    examList
-//            );
-//            examComElement.refreshSelected();
-//            tableElement.resetToDefaultItems();
-//            addItemWindow.close();
-//        });
+        ((Button)addItemWindow.getDialogPane().lookupButton(addItemWindow.getButtonTypes().get(0))).setOnAction(ae->{
+            controller.add(
+                    nameField.getText(),
+                    mNameField.getText(),
+                    upnField.getText(),
+                    Integer.parseInt(stockField.getText()),
+                    addressField.getText()
+            );
+
+            tableElement.resetToDefaultItems();
+            addItemWindow.close();
+        });
     }
 
     private class RequestElement {
