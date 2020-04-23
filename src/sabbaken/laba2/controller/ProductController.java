@@ -32,4 +32,8 @@ public class ProductController {
     public void saveFile(File file) {
         fileHelper.saveFile(file, products);
     }
+
+    public void newDoc() {
+        this.products = new ArrayList<Product>();
+    }
 }

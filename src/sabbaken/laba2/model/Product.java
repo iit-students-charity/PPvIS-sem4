@@ -12,4 +12,21 @@ public final class Product extends Model {
         this.stock = stock;
         this.warehouseAddress = warehouseAddress;
     }
+
+    public String getName(){
+     return this.name;
+    }
+
+    public String getManufacturer(){
+        return this.manufacturer;
+    }
+    public String getManufacturerID(){
+        return this.manufacturerID;
+    }
+    public int getStock(){
+        return this.stock;
+    }
+    public String getWarehouseAddress(){
+        return this.warehouseAddress;
+    }
 }

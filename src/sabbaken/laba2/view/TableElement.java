@@ -26,55 +26,66 @@ public class TableElement {
     private ToolBar            navigator,
                                pagination;
     private Pane               tableElement;
-    private List<Product> defaultStudentList;
+    private List<Product> defaultProductsList;
     private ObservableList<Product> studentObsList,
                                     curStudentObsList;
 
-    public TableElement(ArrayList<Product> studentList, int examNumber){
-        final int    TABLE_HEIGHT                 = 600,
-                     TABLE_WIDTH                  = 1460,
-                     DEFAULT_ROWS_ON_PAGE_NUMBER  = 17;
-        final String SNP_COLUMN_LABEL_TEXT        = "Прозвішча студэнта",
-                     GROUP_COLUMN_LABEL_TEXT      = "Група",
-                     EXAMS_COLUMN_LABEL_TEXT      = "Экзамены",
-                     EXAM_NAME_COLUMN_LABEL_TEXT  = "назва",
-                     EXAM_SCORE_COLUMN_LABEL_TEXT = "адзн.",
-                     ROWS_ON_PAGE_LABEL_TEXT      = "Радкоў на старонцы: ",
-                     TO_BEGIN_BUTTON_LABEL_TEXT   = "<<",
-                     TO_LEFT_BUTTON_LABEL_TEXT    = "<",
-                     TO_RIGHT_BUTTON_LABEL_TEXT   = ">",
-                     TO_END_BUTTON_LABEL_TEXT     = ">>";
+    public TableElement(ArrayList<Product> productsList, int examNumber){
+        final int    TABLE_HEIGHT                   = 600,
+                     TABLE_WIDTH                    = 1460,
+                     DEFAULT_ROWS_ON_PAGE_NUMBER    = 17;
+        final String NAME_COLUMN_LABEL_TEXT         = "Название товара",
+                     M_NAME_COLUMN_LABEL_TEXT       = "Название производителя",
+                     UPN_COLUMN_LABEL_TEXT          = "УПН производителя",
+                     STOCK_NAME_COLUMN_LABEL_TEXT   = "Количество на складе",
+                     ADDRESS_SCORE_COLUMN_LABEL_TEXT = "Адресс склада",
+                     ROWS_ON_PAGE_LABEL_TEXT        = "Строк на странице: ",
+                     TO_BEGIN_BUTTON_LABEL_TEXT     = "<<",
+                     TO_LEFT_BUTTON_LABEL_TEXT      = "<",
+                     TO_RIGHT_BUTTON_LABEL_TEXT     = ">",
+                     TO_END_BUTTON_LABEL_TEXT       = ">>";
         Property  sProperty       = new SimpleStringProperty();
         Button    toBeginButton   = new Button(TO_BEGIN_BUTTON_LABEL_TEXT),
                   toLeftButton    = new Button(TO_LEFT_BUTTON_LABEL_TEXT),
                   toRightButton   = new Button(TO_RIGHT_BUTTON_LABEL_TEXT),
                   toEndButton     = new Button(TO_END_BUTTON_LABEL_TEXT);
-        TableColumn<Product, String> snpCol   = new TableColumn<>(SNP_COLUMN_LABEL_TEXT),
-                                     groupCol = new TableColumn<>(GROUP_COLUMN_LABEL_TEXT),
-                                     examsCol = new TableColumn<>(EXAMS_COLUMN_LABEL_TEXT),
-                                     examNameCol;
-        List<TableColumn<Product, String>> examNumColList   = new ArrayList<>(),
-                                           examNameColList  = new ArrayList<>(),
-                                           examScoreColList = new ArrayList<>();
+        TableColumn<Product, String> nameCol   = new TableColumn<>(NAME_COLUMN_LABEL_TEXT),
+                                     mNameCol = new TableColumn<>(M_NAME_COLUMN_LABEL_TEXT),
+                                     upnCol = new TableColumn<>(UPN_COLUMN_LABEL_TEXT),
+                                     stockCol = new TableColumn<>(STOCK_NAME_COLUMN_LABEL_TEXT),
+                                     addressCol = new TableColumn<>(ADDRESS_SCORE_COLUMN_LABEL_TEXT);
 
-        defaultStudentList = studentList;
-        studentObsList     = FXCollections.observableArrayList(defaultStudentList);
+
+        defaultProductsList = productsList;
+        studentObsList     = FXCollections.observableArrayList(defaultProductsList);
         curStudentObsList  = FXCollections.observableArrayList();
 
-        snpCol.setMinWidth(300);
-        snpCol.setCellValueFactory(new PropertyValueFactory<>("alignSnp"));
-        groupCol.setCellValueFactory(new PropertyValueFactory<>("group"));
+        nameCol.setMinWidth(300);
+        mNameCol.setMinWidth(300);
+        upnCol.setMinWidth(100);
+        stockCol.setMinWidth(100);
+        addressCol.setMinWidth(300);
+
+        nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        mNameCol.setCellValueFactory(new PropertyValueFactory<>("manufacturer"));
+        upnCol.setCellValueFactory(new PropertyValueFactory<>("manufacturerID"));
+        stockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        addressCol.setCellValueFactory(new PropertyValueFactory<>("warehouseAddress"));
+
+//        nameCol.setCellValueFactory(p -> {
+//                    sProperty.setValue(String.valueOf(p.getValue().getName(k)));
+//                    return sProperty;
+//                }
+//        );
+//
 //        for(int i=0; i < examNumber; i++){
 //            final int k = i;
 //            examNameCol = new TableColumn(EXAM_NAME_COLUMN_LABEL_TEXT);
 //            examNameCol.setMinWidth(250);
 //            examNameColList.add(examNameCol);
 //            TableColumn<Product, String> studentStringTableColumn = examNameColList.get(i);
-//            studentStringTableColumn.setCellValueFactory(p -> {
-//                    sProperty.setValue(String.valueOf(p.getValue().getExamName(k)));
-//                    return sProperty;
-//                }
-//            );
+//
+//
 //            examScoreColList.add(new TableColumn(EXAM_SCORE_COLUMN_LABEL_TEXT));
 //            examScoreColList.get(i).setCellValueFactory(p -> {
 //                    sProperty.setValue(String.valueOf(p.getValue().getExamScore(k)));
@@ -116,9 +127,11 @@ public class TableElement {
         table.setMinHeight(TABLE_HEIGHT);
         table.setMaxWidth(TABLE_WIDTH);
         table.getColumns().addAll(
-                snpCol,
-                groupCol,
-                examsCol
+                nameCol,
+                mNameCol,
+                upnCol,
+                stockCol,
+                addressCol
         );
         table.setItems(curStudentObsList);
         setRowsOnPage();
@@ -143,11 +156,11 @@ public class TableElement {
     }
 
     public void rewriteDefaultList(List<Product> list){
-        defaultStudentList = list;
+        defaultProductsList = list;
     }
 
     public void resetToDefaultItems(){
-        setObservableList(defaultStudentList);
+        setObservableList(defaultProductsList);
     }
 
     public void setObservableList(List<Product> list){
