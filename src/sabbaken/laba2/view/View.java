@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class View {
-    private final String REGEX_DIGITS_ONLY = "^\\d+$";
     private Scene scene;
     private TableElement tableElement;
     private ProductController controller;
@@ -411,7 +410,6 @@ public class View {
                 address = "";
             }
 
-
             criteriaList = new ArrayList<String>();
             criteriaList.add(name);
             criteriaList.add(mName);
@@ -420,7 +418,6 @@ public class View {
             criteriaList.add(address);
 
             return controller.search(selectedItem, criteriaList);
-
         }
     }
 
@@ -440,21 +437,21 @@ public class View {
     }
 
     private void deleteItems() {
-//        final String WINDOW_TITLE_TEXT = "Выдаліць радкі";
-//        Alert        deleteItemsWindow;
-//        RequestElement requestElement = new RequestElement(WindowType.DELETE);
-//
-//        deleteItemsWindow = createEmptyCloseableDialog();
-//        deleteItemsWindow.setTitle(WINDOW_TITLE_TEXT);
-//        deleteItemsWindow.getDialogPane().setContent(requestElement.get());
-//        deleteItemsWindow.show();
-//
-//        ((Button)deleteItemsWindow.getDialogPane().lookupButton(deleteItemsWindow.getButtonTypes().get(0))).setOnAction(ae->{
-//            createDeleteInfoWindow(String.valueOf(requestElement.search().size()));
-//            controller.delete(requestElement.search());
-//            tableElement.resetToDefaultItems();
-//            deleteItemsWindow.close();
-//        });
+        final String WINDOW_TITLE_TEXT = "Удалить строки";
+        Alert        deleteItemsWindow;
+        RequestElement requestElement = new RequestElement(WindowType.DELETE);
+
+        deleteItemsWindow = createEmptyCloseableDialog();
+        deleteItemsWindow.setTitle(WINDOW_TITLE_TEXT);
+        deleteItemsWindow.getDialogPane().setContent(requestElement.get());
+        deleteItemsWindow.show();
+
+        ((Button)deleteItemsWindow.getDialogPane().lookupButton(deleteItemsWindow.getButtonTypes().get(0))).setOnAction(ae->{
+            createDeleteInfoWindow(String.valueOf(requestElement.search().size()));
+            controller.delete(requestElement.search());
+            tableElement.resetToDefaultItems();
+            deleteItemsWindow.close();
+        });
     }
 
     private void createDeleteInfoWindow(String deleteInfo) {

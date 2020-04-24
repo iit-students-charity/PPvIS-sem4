@@ -22,8 +22,10 @@ public class ProductController {
         products.add(new Product(name, manufacturer, manufacturerID, stock, warehouseAddress));
     }
 
-    public void remove(Product product) {
-        products.remove(product);
+    public void delete(List<Product> indexList){
+        for(Product productToDelete:indexList){
+            products.remove(productToDelete);
+        }
     }
 
     public void openFile(File file) {
