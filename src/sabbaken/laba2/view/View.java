@@ -145,14 +145,14 @@ public class View {
                 new FileChooser.ExtensionFilter("XML-дакумент", "*.xml")
         );
 
-//        try {
-//            controller.openDoc(openDocChooser.showOpenDialog(stage));
-//        } catch (Exception exception){
-//            exception.printStackTrace();
-//        }
-//
-//        tableElement.rewriteDefaultList(controller.getStudentList());
-//        tableElement.resetToDefaultItems();
+        try {
+            controller.openFile(openDocChooser.showOpenDialog(stage));
+        } catch (Exception exception){
+            exception.printStackTrace();
+        }
+
+        tableElement.rewriteDefaultList(controller.products);
+        tableElement.resetToDefaultItems();
     }
 
     private void saveDoc() {
@@ -164,7 +164,7 @@ public class View {
                 new FileChooser.ExtensionFilter("XML-дакумент", "*.xml")
         );
 
-//        controller.saveDoc(saveDocChooser.showSaveDialog(stage));
+        controller.saveFile(saveDocChooser.showSaveDialog(stage));
     }
 
     private void addItems() {
