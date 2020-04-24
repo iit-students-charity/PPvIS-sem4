@@ -72,33 +72,6 @@ public class TableElement {
         stockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         addressCol.setCellValueFactory(new PropertyValueFactory<>("warehouseAddress"));
 
-//        nameCol.setCellValueFactory(p -> {
-//                    sProperty.setValue(String.valueOf(p.getValue().getName(k)));
-//                    return sProperty;
-//                }
-//        );
-//
-//        for(int i=0; i < examNumber; i++){
-//            final int k = i;
-//            examNameCol = new TableColumn(EXAM_NAME_COLUMN_LABEL_TEXT);
-//            examNameCol.setMinWidth(250);
-//            examNameColList.add(examNameCol);
-//            TableColumn<Product, String> studentStringTableColumn = examNameColList.get(i);
-//
-//
-//            examScoreColList.add(new TableColumn(EXAM_SCORE_COLUMN_LABEL_TEXT));
-//            examScoreColList.get(i).setCellValueFactory(p -> {
-//                    sProperty.setValue(String.valueOf(p.getValue().getExamScore(k)));
-//                    return sProperty;
-//                }
-//            );
-//            examNumColList.add(new TableColumn(Integer.toString(i+1)));
-//            examNumColList.get(i).getColumns().addAll(
-//                    examNameColList.get(i),
-//                    examScoreColList.get(i));
-//            examsCol.getColumns().add(examNumColList.get(i));
-//        }
-
         paginationLabel = new Label();
         navigator = new ToolBar(
                 toBeginButton,
@@ -111,7 +84,7 @@ public class TableElement {
         itemsCountLabel = new Label("/" + studentObsList.size() + "/");
         rowsOnPageField = new TextField();
         rowsOnPageField.setText(String.valueOf(DEFAULT_ROWS_ON_PAGE_NUMBER));
-        resetSearchButton = new Button("Скінуць пошук");
+        resetSearchButton = new Button("Сбросить");
         resetSearchButton.setVisible(false);
         pagination = new ToolBar(
                 itemsCountLabel,
@@ -165,7 +138,7 @@ public class TableElement {
 
     public void setObservableList(List<Product> list){
         studentObsList = FXCollections.observableArrayList(list);
-        resetSearchButton.setVisible(true);
+        resetSearchButton.setVisible(false);
 
         setRowsOnPage();
     }

@@ -460,7 +460,7 @@ public class View {
         Alert window = new Alert(Alert.AlertType.NONE);
         VBox vertice = new VBox();
 
-        vertice.getChildren().add(new Label("Выделено " + deleteInfo + " строк."));
+        vertice.getChildren().add(new Label("Удалено " + deleteInfo + " строк."));
         window.getDialogPane().setContent(vertice);
         window.getButtonTypes().addAll(closeButton);
         window.show();
