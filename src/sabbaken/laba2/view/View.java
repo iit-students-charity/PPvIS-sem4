@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import sabbaken.laba2.controller.ProductController;
+import sabbaken.laba2.model.Product;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,7 @@ public class View {
     public View() {
         final int STAGE_WIDTH = 1460,
                 STAGE_HEIGHT = 781;
-        final String STAGE_TITLE_TEXT = "Lab2";
+        final String STAGE_TITLE_TEXT = "Table editor";
 
         this.controller = new ProductController();
         initWindow();
@@ -139,10 +140,10 @@ public class View {
     private void openDoc() {
         FileChooser openDocChooser = new FileChooser();
 
-        openDocChooser.setTitle("Адкрыць дакумент");
+        openDocChooser.setTitle("Открыть документ");
         openDocChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Усе файлы", "*.*"),
-                new FileChooser.ExtensionFilter("XML-дакумент", "*.xml")
+                new FileChooser.ExtensionFilter("Все файлы", "*.*"),
+                new FileChooser.ExtensionFilter("XML-документы", "*.xml")
         );
 
         try {
@@ -158,10 +159,10 @@ public class View {
     private void saveDoc() {
         FileChooser saveDocChooser = new FileChooser();
 
-        saveDocChooser.setTitle("Захаваць дакумент");
+        saveDocChooser.setTitle("Сохранить документ");
         saveDocChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Усе файлы", "*.*"),
-                new FileChooser.ExtensionFilter("XML-дакумент", "*.xml")
+                new FileChooser.ExtensionFilter("Все файлы", "*.*"),
+                new FileChooser.ExtensionFilter("XML-документ", "*.xml")
         );
 
         controller.saveFile(saveDocChooser.showSaveDialog(stage));
@@ -233,9 +234,11 @@ public class View {
     }
 
     private class RequestElement {
-        final String CRITERIA_1 = "СЯРЭДНЯЯ АДЗН. І ПРОЗВІШЧА",
-                CRITERIA_2 = "НАЗВА ГРУПЫ І ПРОЗВІШЧА",
-                CRITERIA_3 = "ПРОЗВІШЧА І АДЗН. ПА ДЫСЦЫПЛІНЕ";
+
+        final String CRITERIA_1 = "По названию товара или количеству на складе",
+                CRITERIA_2 = "По названию производителя или УНП производителя",
+                CRITERIA_3 = "По адресу склада";
+
         private String selectedItem;
         private ComboBox criteriaComBox;
         private Button searchButton;
@@ -258,7 +261,7 @@ public class View {
                     CRITERIA_3
             );
             criteriaComBox.setValue(CRITERIA_1);
-            searchButton = new Button("Шукаць");
+            searchButton = new Button("Поиск");
             criteriaChooser = new HBox();
 
             criteria1LabelList = new ArrayList<>();
@@ -271,13 +274,13 @@ public class View {
             grid = new GridPane();
             switchPreset();
 
-//            tableElement = new TableElement(new ArrayList<>(), controller.getExamNumber());
+            tableElement = new TableElement(new ArrayList<>(), controller.products.size());
 
             this.root = new VBox();
 
             if (windowType == WindowType.SEARCH) {
                 criteriaChooser.getChildren().addAll(
-                        new Label("Крытэрый пошуку: "),
+                        new Label("Критерий поиска: "),
                         criteriaComBox,
                         searchButton
                 );
@@ -298,7 +301,7 @@ public class View {
 
             if (windowType == WindowType.DELETE) {
                 criteriaChooser.getChildren().addAll(
-                        new Label("Крытэрый пошуку: "),
+                        new Label("Кртерий поиска: "),
                         criteriaComBox
                 );
 
@@ -310,19 +313,18 @@ public class View {
                 );
             }
 
+            criteriaComBox.setOnAction(ae -> switchPreset());
+            searchButton.setOnAction(ae->{
+                List<Product> studentList = search();
 
-//            criteriaComBox.setOnAction(ae -> switchPreset());
-//            searchButton.setOnAction(ae->{
-//                List<Student> studentList = search();
-//
-//                tableElement.setObservableList(studentList);
-//            });
+                tableElement.setObservableList(studentList);
+            });
         }
 
         private void switchPreset() {
-            final int CRITERIA_1_FIELD_NUMBER = 3,
+            final int CRITERIA_1_FIELD_NUMBER = 2,
                     CRITERIA_2_FIELD_NUMBER = 2,
-                    CRITERIA_3_FIELD_NUMBER = 4;
+                    CRITERIA_3_FIELD_NUMBER = 1;
 
             grid.getChildren().clear();
             selectedItem = criteriaComBox.getSelectionModel().getSelectedItem().toString();
@@ -355,89 +357,81 @@ public class View {
         }
 
         private void initCriteriaLists() {
-            final String SURNAME_LABEL_TEXT = "Прозвішча: ",
-                    GROUP_LABEL_TEXT = "Нумар групы: ",
-                    DISCIPLINE_LABEL_TEXT = "Дысцыпліна: ",
-                    MINIMAL_SCORE_LABEL_TEXT = "Мінімальная адзн.: ",
-                    MAXIMAL_SCORE_LABEL_TEXT = "Максімальная адзн.: ";
-            TextField surnameField = new TextField();
+            final String NAME_LABEL_TEXT    = "Название товара: ",
+                    STOCK_LABEL_TEXT        = "Количество на складе: ",
+                    M_NAME_LABEL_TEXT       = "Название производителя: ",
+                    UPN_LABEL_TEXT          = "УПН производителя: ",
+                    ADDRESS_LABEL_TEXT      = "По адресу склада: ";
 
-            criteria1LabelList.add(new Label(MINIMAL_SCORE_LABEL_TEXT));
-            criteria1LabelList.add(new Label(MAXIMAL_SCORE_LABEL_TEXT));
-            criteria1LabelList.add(new Label(SURNAME_LABEL_TEXT));
+            criteria1LabelList.add(new Label(NAME_LABEL_TEXT));
+            criteria1LabelList.add(new Label(STOCK_LABEL_TEXT));
             criteria1FieldList.add(new TextField());
             criteria1FieldList.add(new TextField());
-            criteria1FieldList.add(surnameField);
-            criteria2LabelList.add(new Label(GROUP_LABEL_TEXT));
-            criteria2LabelList.add(new Label(SURNAME_LABEL_TEXT));
+
+            criteria2LabelList.add(new Label(M_NAME_LABEL_TEXT));
+            criteria2LabelList.add(new Label(UPN_LABEL_TEXT));
             criteria2FieldList.add(new TextField());
-            criteria2FieldList.add(surnameField);
-            criteria3LabelList.add(new Label(SURNAME_LABEL_TEXT));
-            criteria3LabelList.add(new Label(DISCIPLINE_LABEL_TEXT));
-            criteria3LabelList.add(new Label(MINIMAL_SCORE_LABEL_TEXT));
-            criteria3LabelList.add(new Label(MAXIMAL_SCORE_LABEL_TEXT));
-            criteria3FieldList.add(surnameField);
-            criteria3FieldList.add(new TextField());
-            criteria3FieldList.add(new TextField());
+            criteria2FieldList.add(new TextField());
+
+            criteria3LabelList.add(new Label(ADDRESS_LABEL_TEXT));
             criteria3FieldList.add(new TextField());
         }
 
-//        public Pane get(){
-//            return this.root;
-//        }
-//
-//        public List search(){
-//            int  minimalScore,
-//                 maximalScore,
-//                 disciplineMinimalScore,
-//                 disciplineMaximalScore;
-//            List criteriaList;
-//
-//            try{
-//                minimalScore = Integer.parseInt(criteria1FieldList.get(0).getText());
-//            } catch (NumberFormatException e){
-//                minimalScore = 0;
-//            }
-//            try{
-//                maximalScore = Integer.parseInt(criteria1FieldList.get(1).getText());
-//            } catch (NumberFormatException e){
-//                maximalScore = 0;
-//            }
-//            try{
-//                disciplineMinimalScore = Integer.parseInt(criteria3FieldList.get(2).getText());
-//            } catch (NumberFormatException e){
-//                disciplineMinimalScore = 0;
-//            }
-//            try{
-//                disciplineMaximalScore = Integer.parseInt(criteria3FieldList.get(3).getText());
-//            } catch (NumberFormatException e){
-//                disciplineMaximalScore = 0;
-//            }
-//
-//            criteriaList = new ArrayList<String>();
-//            criteriaList.add(criteria1FieldList.get(2).getText());
-//            criteriaList.add(
-//                    String.valueOf((minimalScore + maximalScore) / 2)
-//            );
-//            criteriaList.add(criteria2FieldList.get(0).getText());
-//            criteriaList.add(criteria3FieldList.get(1).getText());
-//            criteriaList.add(
-//                    String.valueOf((disciplineMinimalScore + disciplineMaximalScore) / 2)
-//            );
-//
-//            return controller.search(selectedItem, criteriaList);
-//
-//        }
+        public Pane get(){
+            return this.root;
+        }
+
+        public List search(){
+            String name, mName, stock, upn, address;
+            List criteriaList;
+
+            try{
+                name = criteria1FieldList.get(0).getText();
+            } catch (NumberFormatException e){
+                name = "";
+            }
+            try{
+                stock = criteria1FieldList.get(1).getText();
+            } catch (NumberFormatException e){
+                stock = "0";
+            }
+            try{
+                mName =criteria2FieldList.get(0).getText();
+            } catch (NumberFormatException e){
+                mName = "";
+            }
+            try{
+                upn = criteria2FieldList.get(1).getText();
+            } catch (NumberFormatException e){
+                upn = "";
+            }
+            try{
+                address = criteria3FieldList.get(0).getText();
+            } catch (NumberFormatException e){
+                address = "";
+            }
+
+
+            criteriaList = new ArrayList<String>();
+            criteriaList.add(name);
+            criteriaList.add(mName);
+            criteriaList.add(upn);
+            criteriaList.add(stock);
+            criteriaList.add(address);
+
+            return controller.search(selectedItem, criteriaList);
+
+        }
     }
 
     private void searchItems() {
-        final String WINDOW_TITLE_TEXT = "Шукаць радкі";
+        final String WINDOW_TITLE_TEXT = "Искать строки";
         Alert searchItemsWindow;
         RequestElement requestElement = new RequestElement(WindowType.SEARCH);
 
         searchItemsWindow = createEmptyCloseableDialog();
         searchItemsWindow.setTitle(WINDOW_TITLE_TEXT);
-//        searchItemsWindow.getDialogPane().setContent(requestElement.get());
+        searchItemsWindow.getDialogPane().setContent(requestElement.get());
         searchItemsWindow.show();
 
         ((Button) searchItemsWindow.getDialogPane().lookupButton(searchItemsWindow.getButtonTypes().get(0))).setOnAction(
@@ -464,19 +458,19 @@ public class View {
     }
 
     private void createDeleteInfoWindow(String deleteInfo) {
-        final String CLOSE_BUTTON_LABEL_TEXT = "Добра";
+        final String CLOSE_BUTTON_LABEL_TEXT = "ОК";
         ButtonType closeButton = new ButtonType(CLOSE_BUTTON_LABEL_TEXT);
         Alert window = new Alert(Alert.AlertType.NONE);
         VBox vertice = new VBox();
 
-        vertice.getChildren().add(new Label("Выдалена " + deleteInfo + " радкоў."));
+        vertice.getChildren().add(new Label("Выделено " + deleteInfo + " строк."));
         window.getDialogPane().setContent(vertice);
         window.getButtonTypes().addAll(closeButton);
         window.show();
     }
 
     private Alert createEmptyCloseableDialog() {
-        final String CLOSE_BUTTON_LABEL_TEXT = "Далей";
+        final String CLOSE_BUTTON_LABEL_TEXT = "Далее";
         ButtonType closeButton = new ButtonType(CLOSE_BUTTON_LABEL_TEXT);
         Alert window = new Alert(Alert.AlertType.NONE);
 
