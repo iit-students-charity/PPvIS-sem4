@@ -23,22 +23,22 @@ public class SAXHandler extends DefaultHandler {
             productWarehouseAddressInput = false;
 
     @Override
-    public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
+    public void startElement(String uri, String localName, String nodeName, Attributes attributes) throws SAXException {
 
-        if (qName.equalsIgnoreCase("product")) {
+        if (nodeName.equalsIgnoreCase("product")) {
             product = new Product("", "", "", 0, "");
             if (productsList == null)
                 productsList = new ArrayList<>();
 
-        } else if (qName.equalsIgnoreCase("name")) {
+        } else if (nodeName.equalsIgnoreCase("name")) {
             productNameInput = true;
-        } else if (qName.equalsIgnoreCase("manufacturer")) {
+        } else if (nodeName.equalsIgnoreCase("manufacturer")) {
             productManufacturerInput = true;
-        } else if (qName.equalsIgnoreCase("manufacturerID")) {
+        } else if (nodeName.equalsIgnoreCase("manufacturerID")) {
             productManufacturerIdInput = true;
-        } else if (qName.equalsIgnoreCase("stock")) {
+        } else if (nodeName.equalsIgnoreCase("stock")) {
             productStockInput = true;
-        } else if (qName.equalsIgnoreCase("warehouseAddress")) {
+        } else if (nodeName.equalsIgnoreCase("warehouseAddress")) {
             productWarehouseAddressInput = true;
         }
         // create the data container
