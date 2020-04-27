@@ -238,7 +238,7 @@ public class View {
                 CRITERIA_2 = "По названию производителя или УНП производителя",
                 CRITERIA_3 = "По адресу склада";
 
-        private String selectedItem;
+        private int selectedItem;
         private ComboBox criteriaComBox;
         private Button searchButton;
         private TableElement tableElement;
@@ -326,9 +326,21 @@ public class View {
                     CRITERIA_3_FIELD_NUMBER = 1;
 
             grid.getChildren().clear();
-            selectedItem = criteriaComBox.getSelectionModel().getSelectedItem().toString();
-            switch (selectedItem) {
+
+            switch (criteriaComBox.getSelectionModel().getSelectedItem().toString()) {
                 case CRITERIA_1:
+                    selectedItem = 0;
+                    break;
+                case CRITERIA_2:
+                    selectedItem = 1;
+                    break;
+                case CRITERIA_3:
+                    selectedItem = 2;
+                    break;
+            }
+
+            switch (selectedItem) {
+                case 0:
                     for (int i = 0; i < CRITERIA_1_FIELD_NUMBER; i++) {
                         grid.addRow(i,
                                 criteria1LabelList.get(i),
@@ -336,7 +348,7 @@ public class View {
                         );
                     }
                     break;
-                case CRITERIA_2:
+                case 1:
                     for (int i = 0; i < CRITERIA_2_FIELD_NUMBER; i++) {
                         grid.addRow(i,
                                 criteria2LabelList.get(i),
@@ -344,7 +356,7 @@ public class View {
                         );
                     }
                     break;
-                case CRITERIA_3:
+                case 2:
                     for (int i = 0; i < CRITERIA_3_FIELD_NUMBER; i++) {
                         grid.addRow(i,
                                 criteria3LabelList.get(i),

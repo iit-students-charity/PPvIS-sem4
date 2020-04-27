@@ -43,17 +43,14 @@ public class ProductController {
         this.products = new ArrayList<Product>();
     }
 
-    public List<Product> search(String selectedItem, List<String> criteriaList){
-        final String  CRITERIA_1  = "По названию товара или количеству на складе",
-                CRITERIA_2  = "По названию производителя или УНП производителя",
-                CRITERIA_3  = "По адресу склада";
+    public List<Product> search(int selectedItem, List<String> criteriaList){
         List<Product> productList = products;
         List          resultList;
 
         resultList = new ArrayList<Product>();
 
         switch (selectedItem){
-            case CRITERIA_1:
+            case 0:
                 final String NAME       = criteriaList.get(0);
                 Integer      STOCK      = 0;
                 if(!criteriaList.get(3).equals("")){
@@ -74,7 +71,7 @@ public class ProductController {
                     }
                 }
                 break;
-            case CRITERIA_2:
+            case 1:
                 final String M_NAME         = criteriaList.get(1),
                              UPN            = criteriaList.get(2);
 
@@ -92,7 +89,7 @@ public class ProductController {
                     }
                 }
                 break;
-            case CRITERIA_3:
+            case 2:
                 final String ADDRESS         = criteriaList.get(4);
 
                 if(!ADDRESS.equals("")) {
