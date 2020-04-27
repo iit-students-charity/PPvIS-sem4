@@ -13,20 +13,23 @@ public final class Product extends Model {
         this.warehouseAddress = warehouseAddress;
     }
 
-    public String getName(){
-     return this.name;
+    public String getName() {
+        return this.name;
     }
 
-    public String getManufacturer(){
+    public String getManufacturer() {
         return this.manufacturer;
     }
-    public String getManufacturerID(){
+
+    public String getManufacturerID() {
         return this.manufacturerID;
     }
-    public int getStock(){
+
+    public int getStock() {
         return this.stock;
     }
-    public String getWarehouseAddress(){
+
+    public String getWarehouseAddress() {
         return this.warehouseAddress;
     }
 }

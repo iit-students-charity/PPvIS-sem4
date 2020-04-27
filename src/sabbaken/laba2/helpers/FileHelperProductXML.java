@@ -17,10 +17,10 @@ import java.util.ArrayList;
 
 public class FileHelperProductXML {
 
-    public FileHelperProductXML(){
+    public FileHelperProductXML() {
     }
 
-    public ArrayList<Product> openFile(File file){
+    public ArrayList<Product> openFile(File file) {
         ArrayList<Product> productsList = new ArrayList<Product>(0);
         SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
 

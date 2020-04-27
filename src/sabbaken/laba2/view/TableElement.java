@@ -15,50 +15,50 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TableElement {
-    private int                rowsOnPage,
-                               currentPage = 1,
-                               numberOfPages;
-    private Label              paginationLabel,
-                               itemsCountLabel;
-    private Button             resetSearchButton;
-    private TextField          rowsOnPageField;
+    private int rowsOnPage,
+            currentPage = 1,
+            numberOfPages;
+    private Label paginationLabel,
+            itemsCountLabel;
+    private Button resetSearchButton;
+    private TextField rowsOnPageField;
     private TableView<Product> table;
-    private ToolBar            navigator,
-                               pagination;
-    private Pane               tableElement;
+    private ToolBar navigator,
+            pagination;
+    private Pane tableElement;
     private List<Product> defaultProductsList;
     private ObservableList<Product> studentObsList,
-                                    curStudentObsList;
+            curStudentObsList;
 
-    public TableElement(ArrayList<Product> productsList, int examNumber){
-        final int    TABLE_HEIGHT                   = 600,
-                     TABLE_WIDTH                    = 1460,
-                     DEFAULT_ROWS_ON_PAGE_NUMBER    = 17;
-        final String NAME_COLUMN_LABEL_TEXT         = "Название товара",
-                     M_NAME_COLUMN_LABEL_TEXT       = "Название производителя",
-                     UPN_COLUMN_LABEL_TEXT          = "УПН производителя",
-                     STOCK_NAME_COLUMN_LABEL_TEXT   = "Количество на складе",
-                     ADDRESS_SCORE_COLUMN_LABEL_TEXT = "Адресс склада",
-                     ROWS_ON_PAGE_LABEL_TEXT        = "Строк на странице: ",
-                     TO_BEGIN_BUTTON_LABEL_TEXT     = "<<",
-                     TO_LEFT_BUTTON_LABEL_TEXT      = "<",
-                     TO_RIGHT_BUTTON_LABEL_TEXT     = ">",
-                     TO_END_BUTTON_LABEL_TEXT       = ">>";
-        Property  sProperty       = new SimpleStringProperty();
-        Button    toBeginButton   = new Button(TO_BEGIN_BUTTON_LABEL_TEXT),
-                  toLeftButton    = new Button(TO_LEFT_BUTTON_LABEL_TEXT),
-                  toRightButton   = new Button(TO_RIGHT_BUTTON_LABEL_TEXT),
-                  toEndButton     = new Button(TO_END_BUTTON_LABEL_TEXT);
-        TableColumn<Product, String> nameCol   = new TableColumn<>(NAME_COLUMN_LABEL_TEXT),
-                                     mNameCol = new TableColumn<>(M_NAME_COLUMN_LABEL_TEXT),
-                                     upnCol = new TableColumn<>(UPN_COLUMN_LABEL_TEXT),
-                                     stockCol = new TableColumn<>(STOCK_NAME_COLUMN_LABEL_TEXT),
-                                     addressCol = new TableColumn<>(ADDRESS_SCORE_COLUMN_LABEL_TEXT);
+    public TableElement(ArrayList<Product> productsList, int examNumber) {
+        final int TABLE_HEIGHT = 600,
+                TABLE_WIDTH = 1460,
+                DEFAULT_ROWS_ON_PAGE_NUMBER = 17;
+        final String NAME_COLUMN_LABEL_TEXT = "Название товара",
+                M_NAME_COLUMN_LABEL_TEXT = "Название производителя",
+                UPN_COLUMN_LABEL_TEXT = "УПН производителя",
+                STOCK_NAME_COLUMN_LABEL_TEXT = "Количество на складе",
+                ADDRESS_SCORE_COLUMN_LABEL_TEXT = "Адресс склада",
+                ROWS_ON_PAGE_LABEL_TEXT = "Строк на странице: ",
+                TO_BEGIN_BUTTON_LABEL_TEXT = "<<",
+                TO_LEFT_BUTTON_LABEL_TEXT = "<",
+                TO_RIGHT_BUTTON_LABEL_TEXT = ">",
+                TO_END_BUTTON_LABEL_TEXT = ">>";
+        Property sProperty = new SimpleStringProperty();
+        Button toBeginButton = new Button(TO_BEGIN_BUTTON_LABEL_TEXT),
+                toLeftButton = new Button(TO_LEFT_BUTTON_LABEL_TEXT),
+                toRightButton = new Button(TO_RIGHT_BUTTON_LABEL_TEXT),
+                toEndButton = new Button(TO_END_BUTTON_LABEL_TEXT);
+        TableColumn<Product, String> nameCol = new TableColumn<>(NAME_COLUMN_LABEL_TEXT),
+                mNameCol = new TableColumn<>(M_NAME_COLUMN_LABEL_TEXT),
+                upnCol = new TableColumn<>(UPN_COLUMN_LABEL_TEXT),
+                stockCol = new TableColumn<>(STOCK_NAME_COLUMN_LABEL_TEXT),
+                addressCol = new TableColumn<>(ADDRESS_SCORE_COLUMN_LABEL_TEXT);
 
 
         defaultProductsList = productsList;
-        studentObsList     = FXCollections.observableArrayList(defaultProductsList);
-        curStudentObsList  = FXCollections.observableArrayList();
+        studentObsList = FXCollections.observableArrayList(defaultProductsList);
+        curStudentObsList = FXCollections.observableArrayList();
 
         nameCol.setMinWidth(300);
         mNameCol.setMinWidth(300);
@@ -111,74 +111,74 @@ public class TableElement {
 
         tableElement = new VBox();
         tableElement.getChildren().addAll(table,
-                                          pagination);
+                pagination);
 
         rowsOnPageField.setOnAction(ae -> setRowsOnPage());
         toBeginButton.setOnAction(ae -> goBegin());
         toLeftButton.setOnAction(ae -> goLeft());
         toRightButton.setOnAction(ae -> goRight());
         toEndButton.setOnAction(ae -> goEnd());
-        resetSearchButton.setOnAction(ae->{
+        resetSearchButton.setOnAction(ae -> {
             resetToDefaultItems();
             resetSearchButton.setVisible(false);
         });
     }
 
-    public Pane get(){
+    public Pane get() {
         return tableElement;
     }
 
-    public void rewriteDefaultList(List<Product> list){
+    public void rewriteDefaultList(List<Product> list) {
         defaultProductsList = list;
     }
 
-    public void resetToDefaultItems(){
+    public void resetToDefaultItems() {
         setObservableList(defaultProductsList);
     }
 
-    public void setObservableList(List<Product> list){
+    public void setObservableList(List<Product> list) {
         studentObsList = FXCollections.observableArrayList(list);
         resetSearchButton.setVisible(false);
 
         setRowsOnPage();
     }
 
-    private void setRowsOnPage(){
+    private void setRowsOnPage() {
         rowsOnPage = Integer.valueOf(rowsOnPageField.getText());
         currentPage = 1;
 
         refreshPage();
     }
 
-    private void goBegin(){
+    private void goBegin() {
         currentPage = 1;
         refreshPage();
     }
 
-    private void goLeft(){
-        if(currentPage > 1){
+    private void goLeft() {
+        if (currentPage > 1) {
             currentPage--;
         }
         refreshPage();
     }
 
-    private void goRight(){
-        if(currentPage < numberOfPages){
+    private void goRight() {
+        if (currentPage < numberOfPages) {
             currentPage++;
         }
         refreshPage();
     }
 
-    private void goEnd(){
+    private void goEnd() {
         currentPage = numberOfPages;
         refreshPage();
     }
 
-    private void refreshPage(){
+    private void refreshPage() {
         int fromIndex = (currentPage - 1) * rowsOnPage,
-            toIndex   =  currentPage      * rowsOnPage;
+                toIndex = currentPage * rowsOnPage;
 
-        if(toIndex > studentObsList.size()){
+        if (toIndex > studentObsList.size()) {
             toIndex = studentObsList.size();
         }
 
@@ -193,7 +193,7 @@ public class TableElement {
         refreshPaginationLabel();
     }
 
-    private void refreshPaginationLabel(){
+    private void refreshPaginationLabel() {
         numberOfPages = (studentObsList.size() - 1) / rowsOnPage + 1;
         paginationLabel.setText(currentPage + "/" + numberOfPages);
         itemsCountLabel.setText("/" + studentObsList.size() + "/");

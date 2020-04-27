@@ -9,11 +9,14 @@ import java.util.List;
 
 public class ProductController {
     FileHelperProductXML fileHelper = new FileHelperProductXML();
-    public ArrayList<Product> products = new ArrayList<Product>();
+    private ArrayList<Product> products = new ArrayList<Product>();
 
     public ProductController() {
     }
 
+    public  ArrayList<Product> getProducts(){
+        return products;
+    }
     public ArrayList<Product> getProductList() {
         return products;
     }

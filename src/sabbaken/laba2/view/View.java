@@ -130,7 +130,7 @@ public class View {
         controller.newDoc();
 
         this.root.getChildren().remove(tableElement.get());
-        tableElement = new TableElement(controller.products, 0);
+        tableElement = new TableElement(controller.getProducts(), 0);
         this.root.getChildren().addAll(
                 tableElement.get()
         );
@@ -147,11 +147,11 @@ public class View {
 
         try {
             controller.openFile(openDocChooser.showOpenDialog(stage));
-        } catch (Exception exception){
+        } catch (Exception exception) {
             exception.printStackTrace();
         }
 
-        tableElement.rewriteDefaultList(controller.products);
+        tableElement.rewriteDefaultList(controller.getProducts());
         tableElement.resetToDefaultItems();
     }
 
@@ -176,12 +176,12 @@ public class View {
                 ADDRESS_NUMBER_LABEL_TEXT = "Адрес склада: ";
 
 //        List<Exam>   examList       = new ArrayList<>();
-        TextField surnameField  = new TextField(),
-                nameField       = new TextField(),
-                mNameField      = new TextField(),
-                upnField        = new TextField(),
-                stockField      = new TextField(),
-                addressField    = new TextField();
+        TextField surnameField = new TextField(),
+                nameField = new TextField(),
+                mNameField = new TextField(),
+                upnField = new TextField(),
+                stockField = new TextField(),
+                addressField = new TextField();
 
 
         GridPane root = new GridPane();
@@ -218,7 +218,7 @@ public class View {
         addItemWindow.getDialogPane().setContent(root);
         addItemWindow.show();
 
-        ((Button)addItemWindow.getDialogPane().lookupButton(addItemWindow.getButtonTypes().get(0))).setOnAction(ae->{
+        ((Button) addItemWindow.getDialogPane().lookupButton(addItemWindow.getButtonTypes().get(0))).setOnAction(ae -> {
             controller.add(
                     nameField.getText(),
                     mNameField.getText(),
@@ -273,7 +273,7 @@ public class View {
             grid = new GridPane();
             switchPreset();
 
-            tableElement = new TableElement(new ArrayList<>(), controller.products.size());
+            tableElement = new TableElement(new ArrayList<>(), controller.getProducts().size());
 
             this.root = new VBox();
 
@@ -313,7 +313,7 @@ public class View {
             }
 
             criteriaComBox.setOnAction(ae -> switchPreset());
-            searchButton.setOnAction(ae->{
+            searchButton.setOnAction(ae -> {
                 List<Product> studentList = search();
 
                 tableElement.setObservableList(studentList);
@@ -356,11 +356,11 @@ public class View {
         }
 
         private void initCriteriaLists() {
-            final String NAME_LABEL_TEXT    = "Название товара: ",
-                    STOCK_LABEL_TEXT        = "Количество на складе: ",
-                    M_NAME_LABEL_TEXT       = "Название производителя: ",
-                    UPN_LABEL_TEXT          = "УПН производителя: ",
-                    ADDRESS_LABEL_TEXT      = "По адресу склада: ";
+            final String NAME_LABEL_TEXT = "Название товара: ",
+                    STOCK_LABEL_TEXT = "Количество на складе: ",
+                    M_NAME_LABEL_TEXT = "Название производителя: ",
+                    UPN_LABEL_TEXT = "УПН производителя: ",
+                    ADDRESS_LABEL_TEXT = "По адресу склада: ";
 
             criteria1LabelList.add(new Label(NAME_LABEL_TEXT));
             criteria1LabelList.add(new Label(STOCK_LABEL_TEXT));
@@ -376,37 +376,37 @@ public class View {
             criteria3FieldList.add(new TextField());
         }
 
-        public Pane get(){
+        public Pane get() {
             return this.root;
         }
 
-        public List search(){
+        public List search() {
             String name, mName, stock, upn, address;
             List criteriaList;
 
-            try{
+            try {
                 name = criteria1FieldList.get(0).getText();
-            } catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 name = "";
             }
-            try{
+            try {
                 stock = criteria1FieldList.get(1).getText();
-            } catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 stock = "0";
             }
-            try{
-                mName =criteria2FieldList.get(0).getText();
-            } catch (NumberFormatException e){
+            try {
+                mName = criteria2FieldList.get(0).getText();
+            } catch (NumberFormatException e) {
                 mName = "";
             }
-            try{
+            try {
                 upn = criteria2FieldList.get(1).getText();
-            } catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 upn = "";
             }
-            try{
+            try {
                 address = criteria3FieldList.get(0).getText();
-            } catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 address = "";
             }
 
@@ -438,7 +438,7 @@ public class View {
 
     private void deleteItems() {
         final String WINDOW_TITLE_TEXT = "Удалить строки";
-        Alert        deleteItemsWindow;
+        Alert deleteItemsWindow;
         RequestElement requestElement = new RequestElement(WindowType.DELETE);
 
         deleteItemsWindow = createEmptyCloseableDialog();
@@ -446,7 +446,7 @@ public class View {
         deleteItemsWindow.getDialogPane().setContent(requestElement.get());
         deleteItemsWindow.show();
 
-        ((Button)deleteItemsWindow.getDialogPane().lookupButton(deleteItemsWindow.getButtonTypes().get(0))).setOnAction(ae->{
+        ((Button) deleteItemsWindow.getDialogPane().lookupButton(deleteItemsWindow.getButtonTypes().get(0))).setOnAction(ae -> {
             createDeleteInfoWindow(String.valueOf(requestElement.search().size()));
             controller.delete(requestElement.search());
             tableElement.resetToDefaultItems();

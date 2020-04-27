@@ -12,7 +12,7 @@ public class SAXHandler extends DefaultHandler {
     private Product product = null;
     private StringBuilder data = null;
 
-    public ArrayList<Product> getPersonList(){
+    public ArrayList<Product> getPersonList() {
         return productsList;
     }
 
@@ -26,7 +26,7 @@ public class SAXHandler extends DefaultHandler {
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
 
         if (qName.equalsIgnoreCase("product")) {
-            product = new Product("","","",0,"");
+            product = new Product("", "", "", 0, "");
             if (productsList == null)
                 productsList = new ArrayList<>();
 
