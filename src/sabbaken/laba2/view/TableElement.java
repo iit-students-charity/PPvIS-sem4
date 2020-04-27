@@ -30,20 +30,22 @@ public class TableElement {
     private ObservableList<Product> studentObsList,
             curStudentObsList;
 
+    private int TABLE_HEIGHT = 600,
+            TABLE_WIDTH = 1460,
+            DEFAULT_ROWS_ON_PAGE_NUMBER = 17;
+    private final String NAME_COLUMN_LABEL_TEXT = "Название товара",
+            M_NAME_COLUMN_LABEL_TEXT = "Название производителя",
+            UPN_COLUMN_LABEL_TEXT = "УПН производителя",
+            STOCK_NAME_COLUMN_LABEL_TEXT = "Количество на складе",
+            ADDRESS_SCORE_COLUMN_LABEL_TEXT = "Адресс склада",
+            ROWS_ON_PAGE_LABEL_TEXT = "Строк на странице: ",
+            TO_BEGIN_BUTTON_LABEL_TEXT = "<<",
+            TO_LEFT_BUTTON_LABEL_TEXT = "<",
+            TO_RIGHT_BUTTON_LABEL_TEXT = ">",
+            TO_END_BUTTON_LABEL_TEXT = ">>";
+
+
     public TableElement(ArrayList<Product> productsList, int examNumber) {
-        final int TABLE_HEIGHT = 600,
-                TABLE_WIDTH = 1460,
-                DEFAULT_ROWS_ON_PAGE_NUMBER = 17;
-        final String NAME_COLUMN_LABEL_TEXT = "Название товара",
-                M_NAME_COLUMN_LABEL_TEXT = "Название производителя",
-                UPN_COLUMN_LABEL_TEXT = "УПН производителя",
-                STOCK_NAME_COLUMN_LABEL_TEXT = "Количество на складе",
-                ADDRESS_SCORE_COLUMN_LABEL_TEXT = "Адресс склада",
-                ROWS_ON_PAGE_LABEL_TEXT = "Строк на странице: ",
-                TO_BEGIN_BUTTON_LABEL_TEXT = "<<",
-                TO_LEFT_BUTTON_LABEL_TEXT = "<",
-                TO_RIGHT_BUTTON_LABEL_TEXT = ">",
-                TO_END_BUTTON_LABEL_TEXT = ">>";
         Property sProperty = new SimpleStringProperty();
         Button toBeginButton = new Button(TO_BEGIN_BUTTON_LABEL_TEXT),
                 toLeftButton = new Button(TO_LEFT_BUTTON_LABEL_TEXT),
