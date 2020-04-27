@@ -40,38 +40,73 @@ public class View {
         stage.setScene(scene);
     }
 
+    public enum INIT_WINDOW_LABEL {
+        EDIT_MENU_LABEL_TEXT("Редактировать"),
+        FILE_MENU_LABEL_TEXT("Файл"),
+        NEW_DOC_MENU_ITEM_LABEL_TEXT("Новый документ"),
+        OPEN_DOC_MENU_ITEM_LABEL_TEXT("Открыть документ"),
+        SAVE_DOC_MENU_ITEM_LABEL_TEXT("Сохранить документ"),
+        ADD_ITEM_MENU_ITEM_LABEL_TEXT("Добваить строчки"),
+        SEARCH_ITEMS_MENU_ITEM_LABEL_TEXT("Поиск по строкам"),
+        DELETE_ITEMS_MENU_ITEM_LABEL_TEXT("Удалить строки"),
+        CLOSE_APP_MENU_ITEM_LABEL_TEXT("Выйти"),
+        NEW_DOC_BUTTON_LABEL_TEXT("Новый документ"),
+        OPEN_DOC_BUTTON_LABEL_TEXT("Открыть документ"),
+        SAVE_DOC_BUTTON_LABEL_TEXT("Сохранить документ"),
+        ADD_ITEMS_BUTTON_LABEL_TEXT("Добавить строчки"),
+        SEARCH_ITEMS_BUTTON_LABEL_TEXT("Поиск по строкам"),
+        DELETE_ITEMS_BUTTON_LABEL_TEXT("Удалить строки"),
+
+        WINDOW_TITLE_TEXT ("Добавить товар: "),
+        NAME_LABEL_TEXT ("Название: "),
+        M_NAME_LABEL_TEXT ("Название производителя: "),
+        UPN_LABEL_TEXT ("УПН: "),
+        STOCK_LABEL_TEXT ("Количество на складе: "),
+        ADDRESS_NUMBER_LABEL_TEXT ("Адрес склада: "),
+
+        OPEN_DOC_BTN_LABEL ("Открыть документ"),
+        SAVE_DOC_BTN_LABEL ("Сохранить документ"),
+
+        NAME_LABEL_TEXT_SEARCH ("Название товара: "),
+        STOCK_LABEL_TEXT_SEARCH ("Количество на складе: "),
+        M_NAME_LABEL_TEXT_SEARCH ("Название производителя: "),
+        UPN_LABEL_TEXT_SEARCH ("УПН производителя: "),
+        ADDRESS_LABEL_TEXT_SEARCH ("По адресу склада: "),
+        WINDOW_TITLE_TEXT_SEARCH ("Искать строки"),
+        WINDOW_TITLE_TEXT_DELETE ("Удалить строки"),
+        CLOSE_BUTTON_LABEL_TEXT_NEXT ("Далее"),
+        CLOSE_BUTTON_LABEL_TEXT_OK ("ОК");
+
+
+        private final String label_text;
+
+        INIT_WINDOW_LABEL(String label_text) {
+            this.label_text = label_text;
+        }
+
+        public String label_text() {
+            return label_text;
+        }
+    }
+
     private void initWindow() {
-        final String FILE_MENU_LABEL_TEXT = "Файл",
-                EDIT_MENU_LABEL_TEXT = "Редактировать",
-                NEW_DOC_MENU_ITEM_LABEL_TEXT = "Новый документ",
-                OPEN_DOC_MENU_ITEM_LABEL_TEXT = "Открыть документ",
-                SAVE_DOC_MENU_ITEM_LABEL_TEXT = "Сохранить документ",
-                ADD_ITEM_MENU_ITEM_LABEL_TEXT = "Добваить строчки",
-                SEARCH_ITEMS_MENU_ITEM_LABEL_TEXT = "Поиск по строкам",
-                DELETE_ITEMS_MENU_ITEM_LABEL_TEXT = "Удалить строки",
-                CLOSE_APP_MENU_ITEM_LABEL_TEXT = "Выйти",
-                NEW_DOC_BUTTON_LABEL_TEXT = "Новый документ",
-                OPEN_DOC_BUTTON_LABEL_TEXT = "Открыть документ",
-                SAVE_DOC_BUTTON_LABEL_TEXT = "Сохранить документ",
-                ADD_ITEMS_BUTTON_LABEL_TEXT = "Добавить строчки",
-                SEARCH_ITEMS_BUTTON_LABEL_TEXT = "Поиск по строкам",
-                DELETE_ITEMS_BUTTON_LABEL_TEXT = "Удалить строки";
-        MenuItem newDocMenuItem = new MenuItem(NEW_DOC_MENU_ITEM_LABEL_TEXT),
-                openDocMenuItem = new MenuItem(OPEN_DOC_MENU_ITEM_LABEL_TEXT),
-                saveMenuItem = new MenuItem(SAVE_DOC_MENU_ITEM_LABEL_TEXT),
-                addItemsMenuItem = new MenuItem(ADD_ITEM_MENU_ITEM_LABEL_TEXT),
-                searchItemsMenuItem = new MenuItem(SEARCH_ITEMS_MENU_ITEM_LABEL_TEXT),
-                deleteItemsMenuItem = new MenuItem(DELETE_ITEMS_MENU_ITEM_LABEL_TEXT),
-                closeAppMenuItem = new MenuItem(CLOSE_APP_MENU_ITEM_LABEL_TEXT);
-        Menu fileMenu = new Menu(FILE_MENU_LABEL_TEXT),
-                editMenu = new Menu(EDIT_MENU_LABEL_TEXT);
+
+        MenuItem newDocMenuItem = new MenuItem(INIT_WINDOW_LABEL.EDIT_MENU_LABEL_TEXT.label_text),
+                openDocMenuItem = new MenuItem(INIT_WINDOW_LABEL.OPEN_DOC_MENU_ITEM_LABEL_TEXT.label_text),
+                saveMenuItem = new MenuItem(INIT_WINDOW_LABEL.SAVE_DOC_MENU_ITEM_LABEL_TEXT.label_text),
+                addItemsMenuItem = new MenuItem(INIT_WINDOW_LABEL.ADD_ITEM_MENU_ITEM_LABEL_TEXT.label_text),
+                searchItemsMenuItem = new MenuItem(INIT_WINDOW_LABEL.SEARCH_ITEMS_MENU_ITEM_LABEL_TEXT.label_text),
+                deleteItemsMenuItem = new MenuItem(INIT_WINDOW_LABEL.DELETE_ITEMS_MENU_ITEM_LABEL_TEXT.label_text),
+                closeAppMenuItem = new MenuItem(INIT_WINDOW_LABEL.CLOSE_APP_MENU_ITEM_LABEL_TEXT.label_text);
+        Menu fileMenu = new Menu(INIT_WINDOW_LABEL.FILE_MENU_LABEL_TEXT.label_text),
+                editMenu = new Menu(INIT_WINDOW_LABEL.EDIT_MENU_LABEL_TEXT.label_text);
         MenuBar menuBar = new MenuBar();
-        Button newDocButton = new Button(NEW_DOC_BUTTON_LABEL_TEXT),
-                openDocButton = new Button(OPEN_DOC_BUTTON_LABEL_TEXT),
-                saveDocButton = new Button(SAVE_DOC_BUTTON_LABEL_TEXT),
-                addItemsButton = new Button(ADD_ITEMS_BUTTON_LABEL_TEXT),
-                searchItemsButton = new Button(SEARCH_ITEMS_BUTTON_LABEL_TEXT),
-                deleteItemsButton = new Button(DELETE_ITEMS_BUTTON_LABEL_TEXT);
+        Button newDocButton = new Button(INIT_WINDOW_LABEL.NEW_DOC_BUTTON_LABEL_TEXT.label_text),
+                openDocButton = new Button(INIT_WINDOW_LABEL.OPEN_DOC_BUTTON_LABEL_TEXT.label_text),
+                saveDocButton = new Button(INIT_WINDOW_LABEL.SAVE_DOC_BUTTON_LABEL_TEXT.label_text),
+                addItemsButton = new Button(INIT_WINDOW_LABEL.ADD_ITEMS_BUTTON_LABEL_TEXT.label_text),
+                searchItemsButton = new Button(INIT_WINDOW_LABEL.SEARCH_ITEMS_BUTTON_LABEL_TEXT.label_text),
+                deleteItemsButton = new Button(INIT_WINDOW_LABEL.DELETE_ITEMS_BUTTON_LABEL_TEXT.label_text);
         ToolBar instruments;
 
         fileMenu.getItems().addAll(
@@ -139,7 +174,7 @@ public class View {
     private void openDoc() {
         FileChooser openDocChooser = new FileChooser();
 
-        openDocChooser.setTitle("Открыть документ");
+        openDocChooser.setTitle(INIT_WINDOW_LABEL.OPEN_DOC_BTN_LABEL.label_text);
         openDocChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Все файлы", "*.*"),
                 new FileChooser.ExtensionFilter("XML-документы", "*.xml")
@@ -158,7 +193,7 @@ public class View {
     private void saveDoc() {
         FileChooser saveDocChooser = new FileChooser();
 
-        saveDocChooser.setTitle("Сохранить документ");
+        saveDocChooser.setTitle(INIT_WINDOW_LABEL.SAVE_DOC_BTN_LABEL.label_text);
         saveDocChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Все файлы", "*.*"),
                 new FileChooser.ExtensionFilter("XML-документ", "*.xml")
@@ -168,14 +203,6 @@ public class View {
     }
 
     private void addItems() {
-        final String WINDOW_TITLE_TEXT = "Добавить товар: ",
-                NAME_LABEL_TEXT = "Название: ",
-                M_NAME_LABEL_TEXT = "Название производителя: ",
-                UPN_LABEL_TEXT = "УПН: ",
-                STOCK_LABEL_TEXT = "Количество на складе: ",
-                ADDRESS_NUMBER_LABEL_TEXT = "Адрес склада: ";
-
-//        List<Exam>   examList       = new ArrayList<>();
         TextField surnameField = new TextField(),
                 nameField = new TextField(),
                 mNameField = new TextField(),
@@ -188,33 +215,33 @@ public class View {
         Alert addItemWindow;
 
         root.addRow(0,
-                new Label(NAME_LABEL_TEXT),
+                new Label(INIT_WINDOW_LABEL.NAME_LABEL_TEXT.label_text),
                 nameField
         );
 
         root.addRow(1,
-                new Label(M_NAME_LABEL_TEXT),
+                new Label(INIT_WINDOW_LABEL.M_NAME_LABEL_TEXT.label_text),
                 mNameField
         );
 
         root.addRow(2,
-                new Label(UPN_LABEL_TEXT),
+                new Label(INIT_WINDOW_LABEL.UPN_LABEL_TEXT.label_text),
                 upnField
         );
 
         root.addRow(3,
-                new Label(STOCK_LABEL_TEXT),
+                new Label(INIT_WINDOW_LABEL.STOCK_LABEL_TEXT.label_text),
                 stockField
         );
 
         root.addRow(4,
-                new Label(ADDRESS_NUMBER_LABEL_TEXT),
+                new Label(INIT_WINDOW_LABEL.ADDRESS_NUMBER_LABEL_TEXT.label_text),
                 addressField
         );
 
 
         addItemWindow = createEmptyCloseableDialog();
-        addItemWindow.setTitle(WINDOW_TITLE_TEXT);
+        addItemWindow.setTitle(INIT_WINDOW_LABEL.WINDOW_TITLE_TEXT.label_text);
         addItemWindow.getDialogPane().setContent(root);
         addItemWindow.show();
 
@@ -368,23 +395,17 @@ public class View {
         }
 
         private void initCriteriaLists() {
-            final String NAME_LABEL_TEXT = "Название товара: ",
-                    STOCK_LABEL_TEXT = "Количество на складе: ",
-                    M_NAME_LABEL_TEXT = "Название производителя: ",
-                    UPN_LABEL_TEXT = "УПН производителя: ",
-                    ADDRESS_LABEL_TEXT = "По адресу склада: ";
-
-            criteria1LabelList.add(new Label(NAME_LABEL_TEXT));
-            criteria1LabelList.add(new Label(STOCK_LABEL_TEXT));
+            criteria1LabelList.add(new Label(INIT_WINDOW_LABEL.NAME_LABEL_TEXT.label_text));
+            criteria1LabelList.add(new Label(INIT_WINDOW_LABEL.STOCK_LABEL_TEXT_SEARCH.label_text));
             criteria1FieldList.add(new TextField());
             criteria1FieldList.add(new TextField());
 
-            criteria2LabelList.add(new Label(M_NAME_LABEL_TEXT));
-            criteria2LabelList.add(new Label(UPN_LABEL_TEXT));
+            criteria2LabelList.add(new Label(INIT_WINDOW_LABEL.M_NAME_LABEL_TEXT_SEARCH.label_text));
+            criteria2LabelList.add(new Label(INIT_WINDOW_LABEL.UPN_LABEL_TEXT_SEARCH.label_text));
             criteria2FieldList.add(new TextField());
             criteria2FieldList.add(new TextField());
 
-            criteria3LabelList.add(new Label(ADDRESS_LABEL_TEXT));
+            criteria3LabelList.add(new Label(INIT_WINDOW_LABEL.ADDRESS_LABEL_TEXT_SEARCH.label_text));
             criteria3FieldList.add(new TextField());
         }
 
@@ -434,12 +455,12 @@ public class View {
     }
 
     private void searchItems() {
-        final String WINDOW_TITLE_TEXT = "Искать строки";
+
         Alert searchItemsWindow;
         RequestElement requestElement = new RequestElement(WindowType.SEARCH);
 
         searchItemsWindow = createEmptyCloseableDialog();
-        searchItemsWindow.setTitle(WINDOW_TITLE_TEXT);
+        searchItemsWindow.setTitle(INIT_WINDOW_LABEL.WINDOW_TITLE_TEXT_SEARCH.label_text);
         searchItemsWindow.getDialogPane().setContent(requestElement.get());
         searchItemsWindow.show();
 
@@ -449,12 +470,12 @@ public class View {
     }
 
     private void deleteItems() {
-        final String WINDOW_TITLE_TEXT = "Удалить строки";
+
         Alert deleteItemsWindow;
         RequestElement requestElement = new RequestElement(WindowType.DELETE);
 
         deleteItemsWindow = createEmptyCloseableDialog();
-        deleteItemsWindow.setTitle(WINDOW_TITLE_TEXT);
+        deleteItemsWindow.setTitle(INIT_WINDOW_LABEL.WINDOW_TITLE_TEXT_DELETE.label_text);
         deleteItemsWindow.getDialogPane().setContent(requestElement.get());
         deleteItemsWindow.show();
 
@@ -467,8 +488,8 @@ public class View {
     }
 
     private void createDeleteInfoWindow(String deleteInfo) {
-        final String CLOSE_BUTTON_LABEL_TEXT = "ОК";
-        ButtonType closeButton = new ButtonType(CLOSE_BUTTON_LABEL_TEXT);
+
+        ButtonType closeButton = new ButtonType(INIT_WINDOW_LABEL.CLOSE_BUTTON_LABEL_TEXT_OK.label_text);
         Alert window = new Alert(Alert.AlertType.NONE);
         VBox vertice = new VBox();
 
@@ -479,8 +500,8 @@ public class View {
     }
 
     private Alert createEmptyCloseableDialog() {
-        final String CLOSE_BUTTON_LABEL_TEXT = "Далее";
-        ButtonType closeButton = new ButtonType(CLOSE_BUTTON_LABEL_TEXT);
+
+        ButtonType closeButton = new ButtonType(INIT_WINDOW_LABEL.CLOSE_BUTTON_LABEL_TEXT_NEXT.label_text);
         Alert window = new Alert(Alert.AlertType.NONE);
 
         window.getButtonTypes().addAll(closeButton);

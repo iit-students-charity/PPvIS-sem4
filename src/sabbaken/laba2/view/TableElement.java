@@ -33,29 +33,43 @@ public class TableElement {
     private int TABLE_HEIGHT = 600,
             TABLE_WIDTH = 1460,
             DEFAULT_ROWS_ON_PAGE_NUMBER = 17;
-    private final String NAME_COLUMN_LABEL_TEXT = "Название товара",
-            M_NAME_COLUMN_LABEL_TEXT = "Название производителя",
-            UPN_COLUMN_LABEL_TEXT = "УПН производителя",
-            STOCK_NAME_COLUMN_LABEL_TEXT = "Количество на складе",
-            ADDRESS_SCORE_COLUMN_LABEL_TEXT = "Адресс склада",
-            ROWS_ON_PAGE_LABEL_TEXT = "Строк на странице: ",
-            TO_BEGIN_BUTTON_LABEL_TEXT = "<<",
-            TO_LEFT_BUTTON_LABEL_TEXT = "<",
-            TO_RIGHT_BUTTON_LABEL_TEXT = ">",
-            TO_END_BUTTON_LABEL_TEXT = ">>";
+
+    public enum INIT_WINDOW_LABEL {
+        NAME_COLUMN_LABEL_TEXT ("Название товара"),
+        M_NAME_COLUMN_LABEL_TEXT ("Название производителя"),
+        UPN_COLUMN_LABEL_TEXT ("УПН производителя"),
+        STOCK_NAME_COLUMN_LABEL_TEXT ("Количество на складе"),
+        ADDRESS_SCORE_COLUMN_LABEL_TEXT ("Адресс склада"),
+        ROWS_ON_PAGE_LABEL_TEXT ("Строк на странице: "),
+        TO_BEGIN_BUTTON_LABEL_TEXT ("<<"),
+        TO_LEFT_BUTTON_LABEL_TEXT ("<"),
+        TO_RIGHT_BUTTON_LABEL_TEXT (">"),
+        TO_END_BUTTON_LABEL_TEXT (">>");
+
+
+        private final String label_text;
+
+        INIT_WINDOW_LABEL(String label_text) {
+            this.label_text = label_text;
+        }
+
+        public String label_text() {
+            return label_text;
+        }
+    }
 
 
     public TableElement(ArrayList<Product> productsList, int examNumber) {
         Property sProperty = new SimpleStringProperty();
-        Button toBeginButton = new Button(TO_BEGIN_BUTTON_LABEL_TEXT),
-                toLeftButton = new Button(TO_LEFT_BUTTON_LABEL_TEXT),
-                toRightButton = new Button(TO_RIGHT_BUTTON_LABEL_TEXT),
-                toEndButton = new Button(TO_END_BUTTON_LABEL_TEXT);
-        TableColumn<Product, String> nameCol = new TableColumn<>(NAME_COLUMN_LABEL_TEXT),
-                mNameCol = new TableColumn<>(M_NAME_COLUMN_LABEL_TEXT),
-                upnCol = new TableColumn<>(UPN_COLUMN_LABEL_TEXT),
-                stockCol = new TableColumn<>(STOCK_NAME_COLUMN_LABEL_TEXT),
-                addressCol = new TableColumn<>(ADDRESS_SCORE_COLUMN_LABEL_TEXT);
+        Button toBeginButton = new Button(INIT_WINDOW_LABEL.TO_BEGIN_BUTTON_LABEL_TEXT.label_text),
+                toLeftButton = new Button(INIT_WINDOW_LABEL.TO_LEFT_BUTTON_LABEL_TEXT.label_text),
+                toRightButton = new Button(INIT_WINDOW_LABEL.TO_RIGHT_BUTTON_LABEL_TEXT.label_text),
+                toEndButton = new Button(INIT_WINDOW_LABEL.TO_END_BUTTON_LABEL_TEXT.label_text);
+        TableColumn<Product, String> nameCol = new TableColumn<>(INIT_WINDOW_LABEL.NAME_COLUMN_LABEL_TEXT.label_text),
+                mNameCol = new TableColumn<>(INIT_WINDOW_LABEL.M_NAME_COLUMN_LABEL_TEXT.label_text),
+                upnCol = new TableColumn<>(INIT_WINDOW_LABEL.UPN_COLUMN_LABEL_TEXT.label_text),
+                stockCol = new TableColumn<>(INIT_WINDOW_LABEL.STOCK_NAME_COLUMN_LABEL_TEXT.label_text),
+                addressCol = new TableColumn<>(INIT_WINDOW_LABEL.ADDRESS_SCORE_COLUMN_LABEL_TEXT.label_text);
 
 
         defaultProductsList = productsList;
@@ -91,7 +105,7 @@ public class TableElement {
         pagination = new ToolBar(
                 itemsCountLabel,
                 new Separator(),
-                new Label(ROWS_ON_PAGE_LABEL_TEXT),
+                new Label(INIT_WINDOW_LABEL.ROWS_ON_PAGE_LABEL_TEXT.label_text),
                 rowsOnPageField,
                 new Separator(),
                 navigator,
