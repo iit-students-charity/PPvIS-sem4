@@ -43,7 +43,7 @@ public class ProductController {
         this.products = new ArrayList<Product>();
     }
 
-    public List search(String selectedItem, List<String> criteriaList){
+    public List<Product> search(String selectedItem, List<String> criteriaList){
         final String  CRITERIA_1  = "По названию товара или количеству на складе",
                 CRITERIA_2  = "По названию производителя или УНП производителя",
                 CRITERIA_3  = "По адресу склада";
