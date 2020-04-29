@@ -35,16 +35,16 @@ public class TableElement {
             DEFAULT_ROWS_ON_PAGE_NUMBER = 17;
 
     public enum INIT_WINDOW_LABEL {
-        NAME_COLUMN_LABEL_TEXT ("Название товара"),
-        M_NAME_COLUMN_LABEL_TEXT ("Название производителя"),
-        UPN_COLUMN_LABEL_TEXT ("УПН производителя"),
-        STOCK_NAME_COLUMN_LABEL_TEXT ("Количество на складе"),
-        ADDRESS_SCORE_COLUMN_LABEL_TEXT ("Адресс склада"),
-        ROWS_ON_PAGE_LABEL_TEXT ("Строк на странице: "),
-        TO_BEGIN_BUTTON_LABEL_TEXT ("<<"),
-        TO_LEFT_BUTTON_LABEL_TEXT ("<"),
-        TO_RIGHT_BUTTON_LABEL_TEXT (">"),
-        TO_END_BUTTON_LABEL_TEXT (">>");
+        NAME_COLUMN_LABEL_TEXT("Название товара"),
+        M_NAME_COLUMN_LABEL_TEXT("Название производителя"),
+        UPN_COLUMN_LABEL_TEXT("УПН производителя"),
+        STOCK_NAME_COLUMN_LABEL_TEXT("Количество на складе"),
+        ADDRESS_SCORE_COLUMN_LABEL_TEXT("Адресс склада"),
+        ROWS_ON_PAGE_LABEL_TEXT("Строк на странице: "),
+        TO_BEGIN_BUTTON_LABEL_TEXT("<<"),
+        TO_LEFT_BUTTON_LABEL_TEXT("<"),
+        TO_RIGHT_BUTTON_LABEL_TEXT(">"),
+        TO_END_BUTTON_LABEL_TEXT(">>");
 
 
         private final String label_text;
@@ -61,15 +61,15 @@ public class TableElement {
 
     public TableElement(ArrayList<Product> productsList, int examNumber) {
         Property sProperty = new SimpleStringProperty();
-        Button toBeginButton = new Button(INIT_WINDOW_LABEL.TO_BEGIN_BUTTON_LABEL_TEXT.label_text),
-                toLeftButton = new Button(INIT_WINDOW_LABEL.TO_LEFT_BUTTON_LABEL_TEXT.label_text),
-                toRightButton = new Button(INIT_WINDOW_LABEL.TO_RIGHT_BUTTON_LABEL_TEXT.label_text),
-                toEndButton = new Button(INIT_WINDOW_LABEL.TO_END_BUTTON_LABEL_TEXT.label_text);
-        TableColumn<Product, String> nameCol = new TableColumn<>(INIT_WINDOW_LABEL.NAME_COLUMN_LABEL_TEXT.label_text),
-                mNameCol = new TableColumn<>(INIT_WINDOW_LABEL.M_NAME_COLUMN_LABEL_TEXT.label_text),
-                upnCol = new TableColumn<>(INIT_WINDOW_LABEL.UPN_COLUMN_LABEL_TEXT.label_text),
-                stockCol = new TableColumn<>(INIT_WINDOW_LABEL.STOCK_NAME_COLUMN_LABEL_TEXT.label_text),
-                addressCol = new TableColumn<>(INIT_WINDOW_LABEL.ADDRESS_SCORE_COLUMN_LABEL_TEXT.label_text);
+        Button toBeginButton = new Button(INIT_WINDOW_LABEL.TO_BEGIN_BUTTON_LABEL_TEXT.label_text);
+        Button toLeftButton = new Button(INIT_WINDOW_LABEL.TO_LEFT_BUTTON_LABEL_TEXT.label_text);
+        Button toRightButton = new Button(INIT_WINDOW_LABEL.TO_RIGHT_BUTTON_LABEL_TEXT.label_text);
+        Button toEndButton = new Button(INIT_WINDOW_LABEL.TO_END_BUTTON_LABEL_TEXT.label_text);
+        TableColumn<Product, String> nameCol = new TableColumn<>(INIT_WINDOW_LABEL.NAME_COLUMN_LABEL_TEXT.label_text);
+        TableColumn<Product, String> mNameCol = new TableColumn<>(INIT_WINDOW_LABEL.M_NAME_COLUMN_LABEL_TEXT.label_text);
+        TableColumn<Product, String> upnCol = new TableColumn<>(INIT_WINDOW_LABEL.UPN_COLUMN_LABEL_TEXT.label_text);
+        TableColumn<Product, String> stockCol = new TableColumn<>(INIT_WINDOW_LABEL.STOCK_NAME_COLUMN_LABEL_TEXT.label_text);
+        TableColumn<Product, String> addressCol = new TableColumn<>(INIT_WINDOW_LABEL.ADDRESS_SCORE_COLUMN_LABEL_TEXT.label_text);
 
 
         defaultProductsList = productsList;
