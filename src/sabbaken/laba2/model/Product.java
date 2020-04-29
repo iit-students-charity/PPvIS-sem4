@@ -1,7 +1,7 @@
 package sabbaken.laba2.model;
 
 
-public final class Product extends Model {
+public final class Product {
     public String name, manufacturer, manufacturerID, warehouseAddress;
     public int stock;
 
