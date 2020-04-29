@@ -89,6 +89,22 @@ public class View {
         }
     }
 
+    public enum SEARCH_TYPE {
+        BY_NAME_AND_STOCK("По названию товара или количеству на складе"),
+        BY_MANUFACTURER_NAME_AND_UPN("По названию производителя или УНП производителя"),
+        BY_ADDRESS("По адресу склада");
+
+        private final String label_text;
+
+        SEARCH_TYPE(String label_text) {
+            this.label_text = label_text;
+        }
+
+        public final String label_text() {
+            return label_text;
+        }
+    }
+
     private void initWindow() {
 
         MenuItem newDocMenuItem = new MenuItem(INIT_WINDOW_LABEL.EDIT_MENU_LABEL_TEXT.label_text);
@@ -260,12 +276,7 @@ public class View {
     }
 
     private class RequestElement {
-
-        final String CRITERIA_1 = "По названию товара или количеству на складе",
-                CRITERIA_2 = "По названию производителя или УНП производителя",
-                CRITERIA_3 = "По адресу склада";
-
-        private int selectedItem;
+        private String selectedItem;
         private ComboBox criteriaComBox;
         private Button searchButton;
         private TableElement tableElement;
@@ -278,15 +289,16 @@ public class View {
         private List<TextField> criteria1FieldList,
                 criteria2FieldList,
                 criteria3FieldList;
+        private SEARCH_TYPE search_type;
 
         public RequestElement(WindowType windowType) {
             criteriaComBox = new ComboBox();
             criteriaComBox.getItems().addAll(
-                    CRITERIA_1,
-                    CRITERIA_2,
-                    CRITERIA_3
+                    SEARCH_TYPE.BY_NAME_AND_STOCK.label_text,
+                    SEARCH_TYPE.BY_MANUFACTURER_NAME_AND_UPN.label_text,
+                    SEARCH_TYPE.BY_ADDRESS.label_text
             );
-            criteriaComBox.setValue(CRITERIA_1);
+            criteriaComBox.setValue(SEARCH_TYPE.BY_NAME_AND_STOCK.label_text);
             searchButton = new Button("Поиск");
             criteriaChooser = new HBox();
 
@@ -354,20 +366,19 @@ public class View {
 
             grid.getChildren().clear();
 
-            switch (criteriaComBox.getSelectionModel().getSelectedItem().toString()) {
-                case CRITERIA_1:
-                    selectedItem = 0;
-                    break;
-                case CRITERIA_2:
-                    selectedItem = 1;
-                    break;
-                case CRITERIA_3:
-                    selectedItem = 2;
-                    break;
+            selectedItem = criteriaComBox.getSelectionModel().getSelectedItem().toString();
+            if (selectedItem.equals(SEARCH_TYPE.BY_NAME_AND_STOCK.label_text)) {
+                search_type = SEARCH_TYPE.BY_NAME_AND_STOCK;
+            }
+            if (selectedItem.equals(SEARCH_TYPE.BY_MANUFACTURER_NAME_AND_UPN.label_text)) {
+                search_type = SEARCH_TYPE.BY_MANUFACTURER_NAME_AND_UPN;
+            }
+            if (selectedItem.equals(SEARCH_TYPE.BY_ADDRESS.label_text)) {
+                search_type = SEARCH_TYPE.BY_ADDRESS;
             }
 
-            switch (selectedItem) {
-                case 0:
+            switch (search_type) {
+                case BY_NAME_AND_STOCK:
                     for (int i = 0; i < CRITERIA_1_FIELD_NUMBER; i++) {
                         grid.addRow(i,
                                 criteria1LabelList.get(i),
@@ -375,7 +386,7 @@ public class View {
                         );
                     }
                     break;
-                case 1:
+                case BY_MANUFACTURER_NAME_AND_UPN:
                     for (int i = 0; i < CRITERIA_2_FIELD_NUMBER; i++) {
                         grid.addRow(i,
                                 criteria2LabelList.get(i),
@@ -383,7 +394,7 @@ public class View {
                         );
                     }
                     break;
-                case 2:
+                case BY_ADDRESS:
                     for (int i = 0; i < CRITERIA_3_FIELD_NUMBER; i++) {
                         grid.addRow(i,
                                 criteria3LabelList.get(i),
@@ -450,7 +461,7 @@ public class View {
             criteriaList.add(stock);
             criteriaList.add(address);
 
-            return controller.search(selectedItem, criteriaList);
+            return controller.search(search_type, criteriaList);
         }
     }
 
