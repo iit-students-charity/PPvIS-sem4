@@ -27,8 +27,8 @@ public class View {
     }
 
     public View() {
-        final int STAGE_WIDTH = 1460,
-                STAGE_HEIGHT = 781;
+        final int STAGE_WIDTH = 1460;
+        final int STAGE_HEIGHT = 781;
         final String STAGE_TITLE_TEXT = "Table editor";
 
         this.controller = new ProductController();
@@ -57,25 +57,25 @@ public class View {
         SEARCH_ITEMS_BUTTON_LABEL_TEXT("Поиск по строкам"),
         DELETE_ITEMS_BUTTON_LABEL_TEXT("Удалить строки"),
 
-        WINDOW_TITLE_TEXT ("Добавить товар: "),
-        NAME_LABEL_TEXT ("Название: "),
-        M_NAME_LABEL_TEXT ("Название производителя: "),
-        UPN_LABEL_TEXT ("УПН: "),
-        STOCK_LABEL_TEXT ("Количество на складе: "),
-        ADDRESS_NUMBER_LABEL_TEXT ("Адрес склада: "),
+        WINDOW_TITLE_TEXT("Добавить товар: "),
+        NAME_LABEL_TEXT("Название: "),
+        M_NAME_LABEL_TEXT("Название производителя: "),
+        UPN_LABEL_TEXT("УПН: "),
+        STOCK_LABEL_TEXT("Количество на складе: "),
+        ADDRESS_NUMBER_LABEL_TEXT("Адрес склада: "),
 
-        OPEN_DOC_BTN_LABEL ("Открыть документ"),
-        SAVE_DOC_BTN_LABEL ("Сохранить документ"),
+        OPEN_DOC_BTN_LABEL("Открыть документ"),
+        SAVE_DOC_BTN_LABEL("Сохранить документ"),
 
-        NAME_LABEL_TEXT_SEARCH ("Название товара: "),
-        STOCK_LABEL_TEXT_SEARCH ("Количество на складе: "),
-        M_NAME_LABEL_TEXT_SEARCH ("Название производителя: "),
-        UPN_LABEL_TEXT_SEARCH ("УПН производителя: "),
-        ADDRESS_LABEL_TEXT_SEARCH ("По адресу склада: "),
-        WINDOW_TITLE_TEXT_SEARCH ("Искать строки"),
-        WINDOW_TITLE_TEXT_DELETE ("Удалить строки"),
-        CLOSE_BUTTON_LABEL_TEXT_NEXT ("Далее"),
-        CLOSE_BUTTON_LABEL_TEXT_OK ("ОК");
+        NAME_LABEL_TEXT_SEARCH("Название товара: "),
+        STOCK_LABEL_TEXT_SEARCH("Количество на складе: "),
+        M_NAME_LABEL_TEXT_SEARCH("Название производителя: "),
+        UPN_LABEL_TEXT_SEARCH("УПН производителя: "),
+        ADDRESS_LABEL_TEXT_SEARCH("По адресу склада: "),
+        WINDOW_TITLE_TEXT_SEARCH("Искать строки"),
+        WINDOW_TITLE_TEXT_DELETE("Удалить строки"),
+        CLOSE_BUTTON_LABEL_TEXT_NEXT("Далее"),
+        CLOSE_BUTTON_LABEL_TEXT_OK("ОК");
 
 
         private final String label_text;
@@ -91,22 +91,22 @@ public class View {
 
     private void initWindow() {
 
-        MenuItem newDocMenuItem = new MenuItem(INIT_WINDOW_LABEL.EDIT_MENU_LABEL_TEXT.label_text),
-                openDocMenuItem = new MenuItem(INIT_WINDOW_LABEL.OPEN_DOC_MENU_ITEM_LABEL_TEXT.label_text),
-                saveMenuItem = new MenuItem(INIT_WINDOW_LABEL.SAVE_DOC_MENU_ITEM_LABEL_TEXT.label_text),
-                addItemsMenuItem = new MenuItem(INIT_WINDOW_LABEL.ADD_ITEM_MENU_ITEM_LABEL_TEXT.label_text),
-                searchItemsMenuItem = new MenuItem(INIT_WINDOW_LABEL.SEARCH_ITEMS_MENU_ITEM_LABEL_TEXT.label_text),
-                deleteItemsMenuItem = new MenuItem(INIT_WINDOW_LABEL.DELETE_ITEMS_MENU_ITEM_LABEL_TEXT.label_text),
-                closeAppMenuItem = new MenuItem(INIT_WINDOW_LABEL.CLOSE_APP_MENU_ITEM_LABEL_TEXT.label_text);
-        Menu fileMenu = new Menu(INIT_WINDOW_LABEL.FILE_MENU_LABEL_TEXT.label_text),
-                editMenu = new Menu(INIT_WINDOW_LABEL.EDIT_MENU_LABEL_TEXT.label_text);
+        MenuItem newDocMenuItem = new MenuItem(INIT_WINDOW_LABEL.EDIT_MENU_LABEL_TEXT.label_text);
+        MenuItem openDocMenuItem = new MenuItem(INIT_WINDOW_LABEL.OPEN_DOC_MENU_ITEM_LABEL_TEXT.label_text);
+        MenuItem saveMenuItem = new MenuItem(INIT_WINDOW_LABEL.SAVE_DOC_MENU_ITEM_LABEL_TEXT.label_text);
+        MenuItem addItemsMenuItem = new MenuItem(INIT_WINDOW_LABEL.ADD_ITEM_MENU_ITEM_LABEL_TEXT.label_text);
+        MenuItem searchItemsMenuItem = new MenuItem(INIT_WINDOW_LABEL.SEARCH_ITEMS_MENU_ITEM_LABEL_TEXT.label_text);
+        MenuItem deleteItemsMenuItem = new MenuItem(INIT_WINDOW_LABEL.DELETE_ITEMS_MENU_ITEM_LABEL_TEXT.label_text);
+        MenuItem closeAppMenuItem = new MenuItem(INIT_WINDOW_LABEL.CLOSE_APP_MENU_ITEM_LABEL_TEXT.label_text);
+        Menu fileMenu = new Menu(INIT_WINDOW_LABEL.FILE_MENU_LABEL_TEXT.label_text);
+        Menu editMenu = new Menu(INIT_WINDOW_LABEL.EDIT_MENU_LABEL_TEXT.label_text);
         MenuBar menuBar = new MenuBar();
-        Button newDocButton = new Button(INIT_WINDOW_LABEL.NEW_DOC_BUTTON_LABEL_TEXT.label_text),
-                openDocButton = new Button(INIT_WINDOW_LABEL.OPEN_DOC_BUTTON_LABEL_TEXT.label_text),
-                saveDocButton = new Button(INIT_WINDOW_LABEL.SAVE_DOC_BUTTON_LABEL_TEXT.label_text),
-                addItemsButton = new Button(INIT_WINDOW_LABEL.ADD_ITEMS_BUTTON_LABEL_TEXT.label_text),
-                searchItemsButton = new Button(INIT_WINDOW_LABEL.SEARCH_ITEMS_BUTTON_LABEL_TEXT.label_text),
-                deleteItemsButton = new Button(INIT_WINDOW_LABEL.DELETE_ITEMS_BUTTON_LABEL_TEXT.label_text);
+        Button newDocButton = new Button(INIT_WINDOW_LABEL.NEW_DOC_BUTTON_LABEL_TEXT.label_text);
+        Button openDocButton = new Button(INIT_WINDOW_LABEL.OPEN_DOC_BUTTON_LABEL_TEXT.label_text);
+        Button saveDocButton = new Button(INIT_WINDOW_LABEL.SAVE_DOC_BUTTON_LABEL_TEXT.label_text);
+        Button addItemsButton = new Button(INIT_WINDOW_LABEL.ADD_ITEMS_BUTTON_LABEL_TEXT.label_text);
+        Button searchItemsButton = new Button(INIT_WINDOW_LABEL.SEARCH_ITEMS_BUTTON_LABEL_TEXT.label_text);
+        Button deleteItemsButton = new Button(INIT_WINDOW_LABEL.DELETE_ITEMS_BUTTON_LABEL_TEXT.label_text);
         ToolBar instruments;
 
         fileMenu.getItems().addAll(
