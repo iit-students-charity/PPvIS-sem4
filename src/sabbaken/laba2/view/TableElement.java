@@ -30,9 +30,9 @@ public class TableElement {
     private ObservableList<Product> studentObsList,
             curStudentObsList;
 
-    private int TABLE_HEIGHT = 600,
-            TABLE_WIDTH = 1460,
-            DEFAULT_ROWS_ON_PAGE_NUMBER = 17;
+    private int TABLE_HEIGHT = 600;
+    private int TABLE_WIDTH = 1460;
+    private int DEFAULT_ROWS_ON_PAGE_NUMBER = 17;
 
     public enum INIT_WINDOW_LABEL {
         NAME_COLUMN_LABEL_TEXT("Название товара"),
