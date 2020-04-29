@@ -10,25 +10,24 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import sabbaken.laba2.model.Product;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class TableElement {
-    private int rowsOnPage,
-            currentPage = 1,
-            numberOfPages;
-    private Label paginationLabel,
-            itemsCountLabel;
+    private int rowsOnPage;
+    private int currentPage = 1;
+    private int numberOfPages;
+    private Label paginationLabel;
+    private Label itemsCountLabel;
     private Button resetSearchButton;
     private TextField rowsOnPageField;
     private TableView<Product> table;
-    private ToolBar navigator,
-            pagination;
+    private ToolBar navigator;
+    private ToolBar pagination;
     private Pane tableElement;
     private List<Product> defaultProductsList;
-    private ObservableList<Product> studentObsList,
-            curStudentObsList;
+    private ObservableList<Product> studentObsList;
+    private ObservableList<Product> curStudentObsList;
 
     private int TABLE_HEIGHT = 600;
     private int TABLE_WIDTH = 1460;
