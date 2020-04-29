@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductController {
-    FileHelperProductXML fileHelper = new FileHelperProductXML();
+    private FileHelperProductXML fileHelper = new FileHelperProductXML();
     private ArrayList<Product> products = new ArrayList<Product>();
 
     public ProductController() {
