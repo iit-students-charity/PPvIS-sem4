@@ -27,8 +27,6 @@ public class Table {
         yColumn.setPrefWidth(140);
         table.getColumns().add(yColumn);
 
-
-
         table.setPrefWidth(300);
         table.setPrefHeight(400);
 

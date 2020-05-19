@@ -42,7 +42,6 @@ public class ChartGroup {
         buttonsBox.setLayoutX(40);
         buttonsBox.setLayoutY(500);
         buttonsBox.setSpacing(20);
-
         setChartPressAndDragEvents();
 
         graphicGroup.getChildren().addAll(lineChart, buttonsBox);

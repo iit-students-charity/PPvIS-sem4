@@ -2,9 +2,7 @@ package controller;
 
 import model.Point2D;
 import view.Table;
-
 import java.util.concurrent.ConcurrentLinkedQueue;
-
 import static java.lang.Thread.currentThread;
 
 public class Function2 implements Runnable {
@@ -35,8 +33,6 @@ public class Function2 implements Runnable {
             }
 
             table.updateTable(new Point2D(x, z));
-            queue.add((int) (z));
-
             queue.add((int) z);
 
             try {

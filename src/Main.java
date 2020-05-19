@@ -17,20 +17,16 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-
         BorderPane root = getWindow();
         primaryStage.setTitle("Plotter");
         scene = new Scene(root, 850, 620);
 
         setSceneKeyPressEvents();
         primaryStage.setScene(scene);
-
         primaryStage.show();
-
     }
 
     private BorderPane getWindow() {
-
         BorderPane window = new BorderPane();
         Table table = new Table();
         Group tableGroup = table.getGroup();

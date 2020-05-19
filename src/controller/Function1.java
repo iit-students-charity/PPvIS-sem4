@@ -1,7 +1,6 @@
 package controller;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
-
 import static java.lang.Thread.currentThread;
 
 public class Function1 implements Runnable {
